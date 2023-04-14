@@ -1,6 +1,7 @@
 # author: https://github.com/johoule/stuff.git
 # Refactor author: Yitian
 # Refactor: change game into class and allow the ability to change color
+# github: https://github.com/ythuang13/CS2520-Python/blob/main/pygame/soccer_class.py
 
 import pygame
 import math
