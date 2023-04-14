@@ -80,23 +80,6 @@ class Soccer():
             y = random.randrange(0, 150)
             self.clouds.append([x, y])
 
-    def draw_fence(self, screen, fence_color=None):
-        if fence_color is None:
-            fence_color = NIGHT_GRAY
-
-        y = 170
-        for x in range(5, 800, 30):
-            pygame.draw.polygon(screen, fence_color, [[x + 2, y], [x + 2, y + 15], [x, y + 15], [x, y]])
-
-        y = 170
-        for x in range(5, 800, 3):
-            pygame.draw.line(screen, fence_color, [x, y], [x, y + 15], 1)
-
-        x = 0
-        for y in range(170, 185, 4):
-            pygame.draw.line(screen, fence_color, [x, y], [x + 800, y], 1)
-
-
     def event_handler(self, event):
         if event.type == pygame.QUIT:
             self.done = True
@@ -185,6 +168,22 @@ class Soccer():
         pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x + 10, y, 16, 16])
         pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x + 20, y + 8, 10, 10])
         pygame.draw.rect(self.SEE_THROUGH, cloud_color, [x + 6, y + 8, 18, 10])
+    
+    def draw_fence(self, screen, fence_color=None):
+        if fence_color is None:
+            fence_color = NIGHT_GRAY
+
+        y = 170
+        for x in range(5, 800, 30):
+            pygame.draw.polygon(screen, fence_color, [[x + 2, y], [x + 2, y + 15], [x, y + 15], [x, y]])
+
+        y = 170
+        for x in range(5, 800, 3):
+            pygame.draw.line(screen, fence_color, [x, y], [x, y + 15], 1)
+
+        x = 0
+        for y in range(170, 185, 4):
+            pygame.draw.line(screen, fence_color, [x, y], [x + 800, y], 1)
     
     def draw_fields(self, screen, field_color, stripe_color):
         pygame.draw.rect(screen, field_color, [0, 180, 800 , 420])
