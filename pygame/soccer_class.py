@@ -5,6 +5,7 @@
 import pygame
 import math
 import random
+from random import randint
 
 # color constant init (R, G, B)
 RED = (255, 0, 0)
@@ -171,12 +172,12 @@ class Soccer():
         if cloud_color is None:
             cloud_color = WHITE
         
-        # TODO randomize cloud shape
-        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x, y + 8, 10, 10])
-        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x + 6, y + 4, 8, 8])
-        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x + 10, y, 16, 16])
-        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x + 20, y + 8, 10, 10])
-        pygame.draw.rect(self.SEE_THROUGH, cloud_color, [x + 6, y + 8, 18, 10])
+        # animate cloud jiggle
+        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x+randint(0,1), y+8+randint(0,1), 10+randint(-1,1), 10],)
+        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x+6+randint(0,1), y+4+randint(0,1), 8+randint(-1,1), 8])
+        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x+10+randint(0,1), y+randint(0,1), 16+randint(-1,1), 16])
+        pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x+20+randint(0,1), y+8+randint(0,1), 10+randint(-1,1), 10])
+        pygame.draw.rect(self.SEE_THROUGH, cloud_color, [x+6, y+8, 18, 10])
     
     def draw_fence(self, screen, fence_color=None) -> None:
         """draw fence on screen with optional argument fence_color
