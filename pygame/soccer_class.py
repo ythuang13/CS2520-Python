@@ -6,8 +6,7 @@ import pygame
 import math
 import random
 
-# color constant init
-''' add colors you use as RGB values here '''
+# color constant init (R, G, B)
 RED = (255, 0, 0)
 GREEN = (52, 166, 36)
 BLUE = (29, 116, 248)
@@ -38,8 +37,7 @@ class Soccer():
     clock = pygame.time.Clock()
     refresh_rate = 60
 
-    # Colors
-
+    # Surface for night and no light
     DARKNESS = pygame.Surface(SIZE)
     SEE_THROUGH = pygame.Surface((800, 180))
 
@@ -57,6 +55,10 @@ class Soccer():
     
 
     def __init__(self, stars_count=200, clouds_count=20):
+        """Soccer pygame constructor.
+        Optional Argument stars_count and clouds_count
+        for number of objects on screen
+        """
         # config
         pygame.display.set_caption(self.TITLE)
 
@@ -81,7 +83,8 @@ class Soccer():
             y = random.randrange(0, 150)
             self.clouds.append([x, y])
 
-    def event_handler(self, event):
+    def event_handler(self, event) -> None:
+        """handle event when pass in."""
         if event.type == pygame.QUIT:
             self.done = True
         elif event.type == pygame.KEYDOWN:
@@ -90,7 +93,8 @@ class Soccer():
             elif event.key == pygame.K_d:
                 self.day = not self.day
 
-    def run(self):
+    def run(self) -> None:
+        """run starts the game, go through the game loop and exit"""
         while not self.done:
             # Event processing (React to key presses, mouse clicks, etc.)
             for event in pygame.event.get():
@@ -153,13 +157,17 @@ class Soccer():
         # Close window and quit
         pygame.quit()
 
-    def draw_clouds(self, screen):
-        # draw clouds
+    def draw_clouds(self, screen) -> None:
+        """draw clouds from the list clouds"""
         for cloud in self.clouds:
             self.draw_cloud(cloud[0], cloud[1])
         screen.blit(self.SEE_THROUGH, (0, 0))
 
-    def draw_cloud(self, x, y, cloud_color=None):
+    def draw_cloud(self, x, y, cloud_color=None) -> None:
+        """draw individual cloud
+        x, y is the position and an optional argument for cloud color
+        default is white
+        """
         if cloud_color is None:
             cloud_color = WHITE
         
@@ -170,7 +178,10 @@ class Soccer():
         pygame.draw.ellipse(self.SEE_THROUGH, cloud_color, [x + 20, y + 8, 10, 10])
         pygame.draw.rect(self.SEE_THROUGH, cloud_color, [x + 6, y + 8, 18, 10])
     
-    def draw_fence(self, screen, fence_color=None):
+    def draw_fence(self, screen, fence_color=None) -> None:
+        """draw fence on screen with optional argument fence_color
+        default is night gray
+        """
         if fence_color is None:
             fence_color = NIGHT_GRAY
 
@@ -186,14 +197,19 @@ class Soccer():
         for y in range(170, 185, 4):
             pygame.draw.line(screen, fence_color, [x, y], [x + 800, y], 1)
     
-    def draw_fields(self, screen, field_color, stripe_color):
+    def draw_fields(self, screen, field_color, stripe_color) -> None:
+        """draw the fields with pass in argument field_color and stripe_color"""
         pygame.draw.rect(screen, field_color, [0, 180, 800 , 420])
         pygame.draw.rect(screen, stripe_color, [0, 180, 800, 42])
         pygame.draw.rect(screen, stripe_color, [0, 264, 800, 52])
         pygame.draw.rect(screen, stripe_color, [0, 368, 800, 62])
         pygame.draw.rect(screen, stripe_color, [0, 492, 800, 82])
 
-    def draw_sun_moon(self, screen, sky_color, sun_color=None, moon_color=None):
+    def draw_sun_moon(self, screen, sky_color, sun_color=None, moon_color=None) -> None:
+        """depends on if day, draw sun or moon
+        optional arguments sun_color and moon_color can be pass in
+        default is bright yellow for sun, white for moon
+        """
         if sun_color is None:
             sun_color = BRIGHT_YELLOW
         if moon_color is None:
@@ -204,7 +220,10 @@ class Soccer():
             pygame.draw.ellipse(screen, moon_color, [520, 50, 40, 40]) 
             pygame.draw.ellipse(screen, sky_color, [530, 45, 40, 40])
 
-    def draw_field_lines(self, screen, line_color=None):
+    def draw_field_lines(self, screen, line_color=None) -> None:
+        """draw field lines with optional argument for line color
+        default is white
+        """
         if line_color is None:
             line_color = WHITE
 
@@ -235,7 +254,11 @@ class Soccer():
         pygame.draw.line(screen, line_color, [530, 270], [490, 220], 3)
     
     def draw_scoreboard(self, screen, 
-            pole_color=None, scoreboard_color=None, scoreboard_border_color=None):
+            pole_color=None, scoreboard_color=None, scoreboard_border_color=None) -> None:
+        """draw scoreboard with the post
+        optional arguments for pole_color, scoreboard_color, scoreboard_border_color
+        default respective is gray, black and white
+        """
         if pole_color is None:
             pole_color = GRAY
         if scoreboard_color is None:
@@ -250,7 +273,10 @@ class Soccer():
         pygame.draw.rect(screen, scoreboard_color, [300, 40, 200, 90])
         pygame.draw.rect(screen, scoreboard_border_color, [302, 42, 198, 88], 2)
 
-    def draw_goal(self, screen, goal_color=None, net_color=None):
+    def draw_goal(self, screen, goal_color=None, net_color=None) -> None:
+        """draw goal post and net with optional arguments goal and net color
+        both default are white
+        """
         if goal_color is None:
             goal_color = WHITE
         if net_color is None:
@@ -286,7 +312,10 @@ class Soccer():
         for i in range(14):
             pygame.draw.line(screen, net_color, [324, 144+i*4], [476, 144+i*4], 1)
     
-    def draw_light_pole(self, screen, light_color, pole_color = None):
+    def draw_light_pole(self, screen, light_color, pole_color = None) -> None:
+        """draw light pole with optional argument pole_color
+        default is gray
+        """
         if pole_color is None:
             pole_color = GRAY
 
@@ -328,7 +357,10 @@ class Soccer():
         pygame.draw.ellipse(screen, light_color, [670, 20, 20, 20])
         pygame.draw.line(screen, pole_color, [590, 20], [690, 20], 2)
 
-    def draw_stands(self, screen, primary_color=None, secondary_color=None):
+    def draw_stands(self, screen, primary_color=None, secondary_color=None) -> None:
+        """draw stands with optional argument for primary color and secondary color
+        default is red and white
+        """
         if primary_color is None:
             primary_color = RED
         if secondary_color is None:
@@ -342,7 +374,10 @@ class Soccer():
         pygame.draw.polygon(screen, primary_color, [[120, 220], [0, 340], [0, 290], [120, 180]])
         pygame.draw.polygon(screen, secondary_color, [[120, 180], [0, 100], [0, 290]])
 
-    def draw_corner_flag(self, screen, flag_pole_color=None, flag_color=None):
+    def draw_corner_flag(self, screen, flag_pole_color=None, flag_color=None) -> None:
+        """draw corner flag with optional arguments for flag_pole_color and flag_color
+        default is bright yellow and red
+        """
         if flag_pole_color is None:
             flag_pole_color = BRIGHT_YELLOW
         if flag_color is None:
