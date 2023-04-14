@@ -230,9 +230,9 @@ class Soccer():
         pygame.draw.arc(screen, line_color, [330, 280, 140, 40], math.pi, 2 * math.pi, 5)
 
         # 6 yard line goal box
-        pygame.draw.line(screen, WHITE, [310, 220], [270, 270], 3)
-        pygame.draw.line(screen, WHITE, [270, 270], [530, 270], 2)
-        pygame.draw.line(screen, WHITE, [530, 270], [490, 220], 3)
+        pygame.draw.line(screen, line_color, [310, 220], [270, 270], 3)
+        pygame.draw.line(screen, line_color, [270, 270], [530, 270], 2)
+        pygame.draw.line(screen, line_color, [530, 270], [490, 220], 3)
     
     def draw_scoreboard(self, screen, 
             pole_color=None, scoreboard_color=None, scoreboard_border_color=None):
