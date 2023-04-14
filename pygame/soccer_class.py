@@ -1,4 +1,6 @@
 # author: https://github.com/johoule/stuff.git
+# Refactor author: Yitian
+# Refactor: change game into class and allow the ability to change color
 
 import pygame
 import math
@@ -27,7 +29,6 @@ ck = (127, 33, 33)
 pygame.init()
 
 class Soccer():
-
     # Window
     SIZE = (800, 600)
     TITLE = "Major League Soccer"
