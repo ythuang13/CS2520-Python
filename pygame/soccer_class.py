@@ -137,7 +137,7 @@ class Soccer():
 
             self.draw_fields(self.screen, field_color, stripe_color)
             self.draw_fence(self.screen)
-            self.draw_sun_moon(self.screen, sky_color)
+            self.draw_sun_moon(self.screen, sky_color, x_offset=-10, size_offset=5)
             self.draw_clouds(self.screen) 
             self.draw_field_lines(self.screen)
             self.draw_scoreboard(self.screen)
@@ -207,20 +207,23 @@ class Soccer():
         pygame.draw.rect(screen, stripe_color, [0, 368, 800, 62])
         pygame.draw.rect(screen, stripe_color, [0, 492, 800, 82])
 
-    def draw_sun_moon(self, screen, sky_color, sun_color=None, moon_color=None) -> None:
+    def draw_sun_moon(self, screen, sky_color, sun_color=None, moon_color=None,
+                      x_offset=0, y_offset=0, size_offset=0) -> None:
         """depends on if day, draw sun or moon
         optional arguments sun_color and moon_color can be pass in
         default is bright yellow for sun, white for moon
+        x_offset, y_offset offset position of sun and moon
+        size_offset offset the size of sun and moon
         """
         if sun_color is None:
             sun_color = BRIGHT_YELLOW
         if moon_color is None:
             moon_color = WHITE
         if self.day:
-            pygame.draw.ellipse(screen, sun_color, [520, 50, 40, 40])
+            pygame.draw.ellipse(screen, sun_color, [520 + x_offset, 50 + y_offset, 40 + size_offset, 40 + size_offset])
         else:
-            pygame.draw.ellipse(screen, moon_color, [520, 50, 40, 40]) 
-            pygame.draw.ellipse(screen, sky_color, [530, 45, 40, 40])
+            pygame.draw.ellipse(screen, moon_color, [520 + x_offset, 50 + y_offset, 40 + size_offset, 40 + size_offset]) 
+            pygame.draw.ellipse(screen, sky_color, [530 + x_offset, 45 + y_offset, 40 + size_offset, 40 + size_offset])
 
     def draw_field_lines(self, screen, line_color=None) -> None:
         """draw field lines with optional argument for line color
