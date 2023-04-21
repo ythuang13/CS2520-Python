@@ -56,15 +56,22 @@ class Soccer():
     done: bool = False
     
 
-    def __init__(self, stars_count=200, clouds_count=20):
+    def __init__(self, stars_count=200, clouds_count=20, darkness_offset=0):
         """Soccer pygame constructor.
         Optional Argument stars_count and clouds_count
         for number of objects on screen
+        darkness offset changes how dark dark is, positive will make it darker,
+        negative will make it lighter
         """
         # config
         pygame.display.set_caption(self.TITLE)
 
-        self.DARKNESS.set_alpha(200)
+        alpha = 200 + darkness_offset
+        if alpha > 255:
+            alpha = 255
+        elif alpha < 0:
+            alpha = 0
+        self.DARKNESS.set_alpha(alpha)
         self.DARKNESS.fill((0, 0, 0))
 
         self.SEE_THROUGH.set_alpha(150)
@@ -401,7 +408,7 @@ class Soccer():
 
 def main():
     """main function to initialize a soccer game and run it"""
-    soccer_game = Soccer(stars_count=1000, clouds_count=20)
+    soccer_game = Soccer(stars_count=1000, clouds_count=20, darkness_offset=30)
     soccer_game.run()
 
 if __name__ == "__main__":
