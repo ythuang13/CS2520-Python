@@ -141,8 +141,8 @@ class Soccer():
             self.draw_clouds(self.screen) 
             self.draw_field_lines(self.screen)
             self.draw_scoreboard(self.screen)
+            self.draw_light_pole(self.screen, light_color, pole1_x_offset=40, pole2_x_offset=-40)
             self.draw_goal(self.screen)
-            self.draw_light_pole(self.screen, light_color)
             self.draw_stands(self.screen)
             self.draw_corner_flag(self.screen)
 
@@ -314,50 +314,53 @@ class Soccer():
         for i in range(14):
             pygame.draw.line(screen, net_color, [324, 144+i*4], [476, 144+i*4], 1)
     
-    def draw_light_pole(self, screen, light_color, pole_color = None) -> None:
+    def draw_light_pole(self, screen, light_color, pole_color = None, 
+                        pole1_x_offset=0, pole2_x_offset=0) -> None:
         """draw light pole with optional argument pole_color
-        default is gray
+        default is gray,
+        pole1_x_offset would move the light pole 1 left or right
+        pole2_x_offset would move the light pole 2 left or right
         """
         if pole_color is None:
             pole_color = GRAY
 
         # light pole 1 left
-        pygame.draw.rect(screen, pole_color, [150, 60, 20, 140])
-        pygame.draw.ellipse(screen, pole_color, [150, 195, 20, 10])
+        pygame.draw.rect(screen, pole_color, [150 + pole1_x_offset, 60, 20, 140])
+        pygame.draw.ellipse(screen, pole_color, [150 + pole1_x_offset, 195, 20, 10])
 
         # lights left
-        pygame.draw.line(screen, pole_color, [110, 60], [210, 60], 2)
-        pygame.draw.ellipse(screen, light_color, [110, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [130, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [150, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [170, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [190, 40, 20, 20])
-        pygame.draw.line(screen, pole_color, [110, 40], [210, 40], 2)
-        pygame.draw.ellipse(screen, light_color, [110, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [130, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [150, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [170, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [190, 20, 20, 20])
-        pygame.draw.line(screen, pole_color, [110, 20], [210, 20], 2)
+        pygame.draw.line(screen, pole_color, [110 + pole1_x_offset, 60], [210 + pole1_x_offset, 60], 2)
+        pygame.draw.ellipse(screen, light_color, [110 + pole1_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [130 + pole1_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [150 + pole1_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [170 + pole1_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [190 + pole1_x_offset, 40, 20, 20])
+        pygame.draw.line(screen, pole_color, [110 + pole1_x_offset, 40], [210 + pole1_x_offset, 40], 2)
+        pygame.draw.ellipse(screen, light_color, [110 + pole1_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [130 + pole1_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [150 + pole1_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [170 + pole1_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [190 + pole1_x_offset, 20, 20, 20])
+        pygame.draw.line(screen, pole_color, [110 + pole1_x_offset, 20], [210 + pole1_x_offset, 20], 2)
 
         # light pole 2 right
-        pygame.draw.rect(screen, pole_color, [630, 60, 20, 140])
-        pygame.draw.ellipse(screen, pole_color, [630, 195, 20, 10])
+        pygame.draw.rect(screen, pole_color, [630 + pole2_x_offset, 60, 20, 140])
+        pygame.draw.ellipse(screen, pole_color, [630 + pole2_x_offset, 195, 20, 10])
 
         # lights right
-        pygame.draw.line(screen, pole_color, [590, 60], [690, 60], 2)
-        pygame.draw.ellipse(screen, light_color, [590, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [610, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [630, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [650, 40, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [670, 40, 20, 20])
-        pygame.draw.line(screen, pole_color, [590, 40], [690, 40], 2)
-        pygame.draw.ellipse(screen, light_color, [590, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [610, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [630, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [650, 20, 20, 20])
-        pygame.draw.ellipse(screen, light_color, [670, 20, 20, 20])
-        pygame.draw.line(screen, pole_color, [590, 20], [690, 20], 2)
+        pygame.draw.line(screen, pole_color, [590 + pole2_x_offset, 60], [690 + pole2_x_offset, 60], 2)
+        pygame.draw.ellipse(screen, light_color, [590 + pole2_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [610 + pole2_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [630 + pole2_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [650 + pole2_x_offset, 40, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [670 + pole2_x_offset, 40, 20, 20])
+        pygame.draw.line(screen, pole_color, [590 + pole2_x_offset, 40], [690 + pole2_x_offset, 40], 2)
+        pygame.draw.ellipse(screen, light_color, [590 + pole2_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [610 + pole2_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [630 + pole2_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [650 + pole2_x_offset, 20, 20, 20])
+        pygame.draw.ellipse(screen, light_color, [670 + pole2_x_offset, 20, 20, 20])
+        pygame.draw.line(screen, pole_color, [590 + pole2_x_offset, 20], [690 + pole2_x_offset, 20], 2)
 
     def draw_stands(self, screen, primary_color=None, secondary_color=None) -> None:
         """draw stands with optional argument for primary color and secondary color
